@@ -9,16 +9,23 @@ variable "proxmox_host" {
   }
 }
 
-variable "naming_convention" {
-  description = "Containers to be created"
+variable "vmid" {
+  default = 300
+}
+
+variable "node_name" {
+  description = "Node name config for containers"
   type        = string
   default     = "pve-1"
 }
 
-variable "ssh_keys" {
-  type = map(any)
-  default = {
-    pub  = "~/.ssh/nixdesk.pub"
-    priv = "~/.ssh/nixdesk"
-  }
+variable "hostname" {
+  description = "Hostname of the container. Will be added before node_name variable"
+  type        = string
+  default     = "lxc"
+}
+
+variable "memory" {
+  description = "Amount of memory for specified container"
+  default     = 1024
 }

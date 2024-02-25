@@ -1,3 +1,5 @@
+# This file holds the terraform block and provider information
+
 terraform {
   required_providers {
     proxmox = {
