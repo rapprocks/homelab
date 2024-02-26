@@ -27,5 +27,46 @@ variable "hostname" {
 
 variable "memory" {
   description = "Amount of memory for specified container"
-  default     = 1024
+  default     = 512
+}
+
+variable "swap" {
+  description = "Amount of swap memory"
+  default     = 512
+}
+
+variable "cores" {
+  description = "The amount of cpu cores that the container should have"
+  default     = 1
+}
+
+variable "features" {
+  type = map(any)
+  default = {
+    fuse    = false
+    nesting = false
+  }
+}
+
+variable "priviliged" {
+  description = "Unpriviliged or not unpriviliged"
+  default     = false
+}
+
+variable "rootfs" {
+  description = "Root filesystem in GB"
+  default     = "2G"
+}
+
+variable "ips" {
+  description = "IPs of the containers, respective of the hostname order"
+  default     = ["10.100.0.29"]
+}
+
+variable "ssh_keys" {
+  type = map(any)
+  default = {
+    pub  = "~/dev/personal/homelab/modules/containers/lxc-key.pub"
+    priv = "~/dev/personal/homelab/modules/containers/lxc-key"
+  }
 }

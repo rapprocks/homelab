@@ -12,20 +12,16 @@ provider "proxmox" {
   pm_debug            = true
 }
 
-module "lxc2-pve-1" {
+module "hass-pve-1" {
   source = "./modules/containers/"
 
-  hostname = "lxc2"
-  memory   = 2048
-}
-
-module "lxc3-pve-1" {
-  source   = "./modules/containers/"
-  hostname = "lxc3"
-
-}
-
-module "lxc4-pve-1" {
-  source   = "./modules/containers/"
-  hostname = "lxc4"
+  hostname = "hass"
+  cores    = 2
+  memory   = 1024
+  swap     = 1024
+  rootfs   = "3G"
+  features = {
+    fuse    = false
+    nesting = true
+  }
 }
