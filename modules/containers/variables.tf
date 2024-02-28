@@ -4,8 +4,8 @@ variable "proxmox_host" {
     pm_api_url          = "https://10.100.0.8:8006/api2/json"
     pm_user             = "root@pam"
     target_node         = "pve-1-prod"
-    pm_api_token_id     = "terraform-prov@pve!terraform"
-    pm_api_token_secret = "139d34c4-d8c0-4fff-9a39-1a7dd498a6c9"
+    pm_api_token_id     = "tf_provisioner@pam!tf_prov"
+    pm_api_token_secret = "d8b599d2-b08e-4b9a-a053-eb252adf121f"
   }
 }
 
