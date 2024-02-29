@@ -11,6 +11,14 @@ variable "vmid" {
   default = 300
 }
 
+variable "network" {
+  type = map(any)
+  default = {
+    gateway = "10.100.0.1"
+    ipv4    = "10.100.0.30"
+  }
+}
+
 variable "node_name" {
   description = "Node name config for containers"
   type        = string
@@ -59,6 +67,11 @@ variable "rootfs" {
 variable "ips" {
   description = "IPs of the containers, respective of the hostname order"
   default     = ["10.100.0.29"]
+}
+
+variable "ansible_user" {
+  default     = "root"
+  description = "Ansible user used to provision the container"
 }
 
 variable "ssh_keys" {

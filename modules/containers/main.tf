@@ -23,11 +23,25 @@ resource "proxmox_lxc" "containers" {
   network {
     name   = "eth0"
     bridge = "vmbr0"
-    ip     = "dhcp"
+    gw     = var.network["gateway"]
+    ip     = var.network["ipv4"]
   }
 
-  password = "ad0nis33"
+  password = "sommartorp1"
   start    = false
 
   ssh_public_keys = file(var.ssh_keys["pub"])
+
+  connection {
+    host        = var.network["ipv4"]
+    user        = var.ansible_user
+    private_key = file(var.ssh_keys["priv"])
+    agent       = false
+    timeout     = "3m"
+  }
+
+  provisioner "local-exec" {
+    working_dir = "../../ansible/"
+    command     = "ansible-playbook -u ${var.ansible_user} --key-file ${var.ssh_keys["priv"]} -i ${var.network["ipv4"]}, provision.yaml"
+  }
 }
