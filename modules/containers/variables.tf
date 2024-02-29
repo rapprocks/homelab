@@ -1,11 +1,9 @@
 variable "proxmox_host" {
   type = map(any)
   default = {
-    pm_api_url          = "https://10.100.0.8:8006/api2/json"
-    pm_user             = "root@pam"
-    target_node         = "pve-1-prod"
-    pm_api_token_id     = "tf_provisioner@pam!tf_prov"
-    pm_api_token_secret = "d8b599d2-b08e-4b9a-a053-eb252adf121f"
+    pm_api_url  = "https://10.100.0.8:8006/api2/json"
+    pm_user     = "root@pam"
+    target_node = "pve-1-prod"
   }
 }
 
