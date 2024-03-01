@@ -2,6 +2,11 @@ provider "proxmox" {
   pm_api_url      = var.proxmox_host["pm_api_url"]
   pm_user         = "root@pam"
   pm_tls_insecure = true
+  pm_log_enable   = true
+  pm_debug        = true
+  pm_log_levels = {
+    _default = "debug"
+  }
 }
 
 resource "proxmox_lxc" "containers" {
@@ -28,7 +33,7 @@ resource "proxmox_lxc" "containers" {
   }
 
   password = "sommartorp1"
-  start    = false
+  start    = true
 
   ssh_public_keys = file(var.ssh_keys["pub"])
 
@@ -41,7 +46,7 @@ resource "proxmox_lxc" "containers" {
   }
 
   provisioner "local-exec" {
-    working_dir = "../../ansible/"
-    command     = "ansible-playbook -u ${var.ansible_user} --key-file ${var.ssh_keys["priv"]} -i ${var.network["ipv4"]}, provision.yaml"
+    working_dir = "/home/phil/dev/personal/homelab/ansible/"
+    command     = "ansible-playbook -u ${var.ansible_user} --key-file=${var.ssh_keys["priv"]} -i ${split("/", var.network["ipv4"])[0]}, provision.yaml"
   }
 }
