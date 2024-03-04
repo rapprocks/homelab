@@ -2,11 +2,6 @@ provider "proxmox" {
   pm_api_url      = var.proxmox_host["pm_api_url"]
   pm_user         = "root@pam"
   pm_tls_insecure = true
-  pm_log_enable   = true
-  pm_debug        = true
-  pm_log_levels = {
-    _default = "debug"
-  }
 }
 
 resource "proxmox_lxc" "containers" {

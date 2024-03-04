@@ -15,7 +15,7 @@ variable "network" {
   type = map(any)
   default = {
     gateway = "10.100.0.1"
-    ipv4    = "10.100.0.30/24"
+    ipv4    = ""
   }
 }
 
