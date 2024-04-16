@@ -1,22 +1,32 @@
 variable "proxmox_host" {
   type = map(any)
   default = {
-    pm_api_url  = "https://10.100.0.8:8006/api2/json"
-    pm_user     = "root@pam"
-    target_node = "pve-1-prod"
+    pm_api_url          = "https://10.100.0.8:8006/api2/json"
+    pm_user             = "root@pam"
+    pm_api_token_id     = "root@pam!root"
+    pm_api_token_secret = "3e6e88da-ce06-4aac-b7d5-d012e5074d2f"
+    target_node         = "pve-1-prod"
   }
+}
+
+variable "user" {
+  description = "User"
+  type        = string
+  default     = "earn"
 }
 
 variable "vmid" {
   default = 300
 }
 
-variable "network" {
-  type = map(any)
-  default = {
-    gateway = "10.100.0.1"
-    ipv4    = "10.100.0.2/24"
-  }
+variable "ipconfig0" {
+  type    = string
+  default = "10.100.0.2/24"
+}
+
+variable "gateway" {
+  type    = string
+  default = "10.100.0.1"
 }
 
 variable "node_name" {
@@ -28,10 +38,14 @@ variable "node_name" {
 variable "hostname" {
   description = "Hostname of the container. Will be added before node_name variable"
   type        = string
-  default     = "lxc"
+  default     = "vm-1"
 }
 
 variable "memory" {
+  description = "Amount of memory for specified container"
+  default     = 512
+}
+variable "baloon" {
   description = "Amount of memory for specified container"
   default     = 512
 }
@@ -42,6 +56,11 @@ variable "swap" {
 }
 
 variable "cores" {
+  description = "The amount of cpu cores that the container should have"
+  default     = 1
+}
+
+variable "sockets" {
   description = "The amount of cpu cores that the container should have"
   default     = 1
 }
@@ -64,6 +83,11 @@ variable "rootfs" {
   default     = "2G"
 }
 
+variable "disk_gb" {
+  description = "Storage for the Vm"
+  default     = "5G"
+}
+
 variable "ips" {
   description = "IPs of the containers, respective of the hostname order"
   default     = ["10.100.0.29"]
@@ -77,7 +101,9 @@ variable "ansible_user" {
 variable "ssh_keys" {
   type = map(any)
   default = {
-    pub  = "~/dev/personal/homelab/modules/containers/lxc-key.pub"
-    priv = "~/dev/personal/homelab/modules/containers/lxc-key"
+    lxc-pub  = "~/dev/personal/homelab/modules/containers/lxc-key.pub"
+    lxc-priv = "~/dev/personal/homelab/modules/containers/lxc-key"
+    vm-priv  = "~/.ssh/vm-key"
+    vm-pub   = "~/.ssh/vm-key.pub"
   }
 }
