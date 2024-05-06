@@ -8,6 +8,9 @@
 ## Need to knows
 - Had to tweak the ssh timeout in ansible.cfg
 
+## Links
+- https://github.com/moltenbit/How-To-Secure-A-Linux-Server-With-Ansible
+
 ## Current IPAM
 
 | IPV4              | hostname         |
@@ -16,13 +19,13 @@
 | 10.100.0.3        | sw-prod-1        |
 | 10.100.0.4        | truenas-prod-1   |
 | 10.100.0.5        | ap-prod-1        |
-| 10.100.0.6        |                  |
-| 10.100.0.7        |                  |
+| 10.100.0.6        | nextcloud-pve-1  |
+| 10.100.0.7        | photoprism-pve-1 |
 | 10.100.0.8        | pve-1-prod       |
-| 10.100.0.9        |                  |
+| 10.100.0.9        | tail-pve-1       |
 | 10.100.0.11       | pihole-iot-1     |
-| 10.100.0.12       |                  |
-| 10.100.0.13       |                  |
+| 10.100.0.12       | hass-pve-1       |
+| 10.100.0.13       | nginx-proxy-pve-1|
 | 10.100.0.14       |                  |
 | 10.100.0.15       |                  |
 | 10.100.0.16       |                  |
