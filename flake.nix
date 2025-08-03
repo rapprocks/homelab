@@ -10,8 +10,7 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
-      sharedModules =
-        [ sops-nix.nixosModules.sops-nix ./modules/common.nix ];
+      sharedModules = [ ./modules/common.nix sops-nix.nixosModules.sops ];
 
     in {
       nixosConfigurations = {
