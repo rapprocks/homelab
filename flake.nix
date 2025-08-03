@@ -9,17 +9,16 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+
+      sharedModules =
+        [ inputs.sops-nix.nixosModules.sops-nix ./modules/common.nix ];
+
     in {
       nixosConfigurations = {
 
-        test-lxc-dev-1 = nixpkgs.lib.nixosSystem {
+        vps-dev-1 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/test-lxc-dev-1 ./modules/common.nix ];
-        };
-
-        test-lxc-dev-2 = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [ ./hosts/test-lxc-dev-2 ./modules/common.nix ];
+          modules = sharedModules ++ [ ./hosts/vps-dev-1 ];
         };
 
       };

@@ -2,6 +2,9 @@
 
 {
   # Common configuration for all servers
+
+  #sops.defaultSopsFile = "./secrets/secrets.yaml";
+  #sops.defaultSopsFileFormat = "yaml";
   
   # Enable SSH
   services.openssh = {
