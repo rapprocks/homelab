@@ -11,7 +11,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
 
       sharedModules =
-        [ inputs.sops-nix.nixosModules.sops-nix ./modules/common.nix ];
+        [ sops-nix.nixosModules.sops-nix ./modules/common.nix ];
 
     in {
       nixosConfigurations = {
