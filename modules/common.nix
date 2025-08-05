@@ -1,11 +1,13 @@
-{ config, pkgs, inputs, ... }:
+{ modulesPath, config, pkgs, inputs, ... }:
 
 {
   # Common configuration for all servers
 
+  imports = [ "${modulesPath}/virtualisation/lxc-container.nix" ];
+
   #sops.defaultSopsFile = "./secrets/secrets.yaml";
   #sops.defaultSopsFileFormat = "yaml";
-  
+
   # Enable SSH
   services.openssh = {
     enable = true;
@@ -44,18 +46,23 @@
     htop
   ];
 
- # system.autoUpgrade = {
- #   enable = true;
- #   flake = inputs.self.outPath;
- #   flags = [
- #     "--update-input"
-  #    "nixpkgs"
-  #    "--no-write-lock-file"
-  #    "-L" # print build logs
-  #  ];
-  #  dates = "02:00";
-  #  randomizedDelaySec = "45min";
-  #};
+  programs.bash.shellAliases = {
+    dot = "cd ~/.dotfiles";
+    rb = "sudo nixos-rebuild switch --flake ~/.dotfiles#";
+  };
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = inputs.self.outPath;
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "--no-write-lock-file"
+      "-L" # print build logs
+    ];
+    dates = "02:00";
+    randomizedDelaySec = "45min";
+  };
 
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -10,6 +10,13 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
+      mkHost = modules:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          inherit modules;
+          specialArgs = { inherit inputs; };
+        };
+
       sharedModules = [ ./modules/common.nix sops-nix.nixosModules.sops ];
 
     in {
@@ -19,7 +26,10 @@
           inherit system;
           modules = sharedModules ++ [ ./hosts/vps-dev-1 ];
         };
-
+        
+        vps-dev-2 = mkHost [
+          ./hosts/vps-dev-2
+        ] ++ sharedModules;
       };
     };
 }
