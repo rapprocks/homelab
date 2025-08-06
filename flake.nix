@@ -29,7 +29,8 @@
         
         vps-dev-2 = mkHost [
           ./hosts/vps-dev-2
-        ] ++ sharedModules;
+          ./modules/common.nix
+        ];
       };
     };
 }

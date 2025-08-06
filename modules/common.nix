@@ -14,7 +14,7 @@
     ports = [ 33001 ];
     settings = {
       PasswordAuthentication = false;
-      PermitRootLogin = "no";
+      PermitRootLogin = "prohibit-password";
       KbdInteractiveAuthentication = false;
     };
   };
@@ -22,7 +22,9 @@
   # Enables vscode server to be installed.
   programs.nix-ld.enable = true;
 
-  users.users.root.hashedPassword = "!"; # Disables root login
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIECuco63b+c3huIxsB9UoFChCQBFkjpThaOnFzu139IF philip@nixwrk"
+  ];
   users.users.admin = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
